@@ -5,6 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I miei animali Preferiti</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- 📌 Milestone 1: Inserire un Componente React
+    Monta un componente React all’interno dell’elemento con classe .lista-animali.
+
+    Il componente deve includere:
+    Un elemento <details> con titolo "Animali", che contiene:
+    Una lista <ul> statica che viene creata a partire da un array di stringhe (animals) dove ciascuna stringa rappresenta il nome di un animale.
+
+    Obiettivo: Mostrare la struttura base della lista di animali con un <details> che può essere espanso o contratto. -->
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        const ListaAnimali = () => {
+            const animals = ["Cane", "Gatto", "Elefante", "Gabbiano", "Rinoceronte"]
+        
+
+        return(
+            <details>
+                <summary>Animali</summary>
+                <p>
+                    <ul>
+                        {animals.map((el, index) => (
+                            <li key={index}>{el}</li>
+                        ))}
+                    </ul>
+                </p>
+            </details>
+        )
+        }
+        const { createRoot } = ReactDOM
+        const listaAnimaliDom = document.querySelector('.lista-animali')
+        const root = createRoot(listaAnimaliDom)
+        root.render(<ListaAnimali/>)
+    </script>
 </head>
 <body>
     <header>
@@ -14,7 +52,9 @@
         <figure>
             <img src="https://picsum.photos/400/300" alt="Immagine Casuale">
         </figure>
-        <div class="lista-animali"></div>
+        <div class="lista-animali">
+
+        </div>
     </main>
       <footer>
       <p>Creato con amore da... un collega sbadato! 🐾</p>
