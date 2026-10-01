@@ -6,14 +6,17 @@
     <title>I miei animali Preferiti</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- 📌 Milestone 1: Inserire un Componente React
-    Monta un componente React all’interno dell’elemento con classe .lista-animali.
 
-    Il componente deve includere:
-    Un elemento <details> con titolo "Animali", che contiene:
-    Una lista <ul> statica che viene creata a partire da un array di stringhe (animals) dove ciascuna stringa rappresenta il nome di un animale.
+    <!-- 📌 Milestone 2: Aggiungere Animali Casuali
+    Trasforma l’array animals usando useState (l’array è inizialmente vuoto).
+    Aggiungi un bottone "Aggiungi Animale" sopra il <details>.
+    Cliccando il bottone, un animale casuale viene aggiunto alla lista.
+    Usa un array predefinito per scegliere casualmente:
 
-    Obiettivo: Mostrare la struttura base della lista di animali con un <details> che può essere espanso o contratto. -->
+    const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
+    L’animale selezionato deve essere aggiunto all’interno della lista <ul> come <li>.
+
+    Obiettivo: L’utente può vedere gli animali aggiunti dinamicamente nella lista. -->
 
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -21,22 +24,34 @@
 
     <script type="text/babel">
 
-        const ListaAnimali = () => {
-            const animals = ["Cane", "Gatto", "Elefante", "Gabbiano", "Rinoceronte"]
-        
+        const { useState } = React
 
-        return(
-            <details>
-                <summary>Animali</summary>
-                <p>
-                    <ul>
-                        {animals.map((el, index) => (
-                            <li key={index}>{el}</li>
-                        ))}
-                    </ul>
-                </p>
-            </details>
-        )
+        const ListaAnimali = () => {
+            const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
+        
+        const [animal, setAnimal] = useState([])
+
+        const add = () => {
+            const indexRandom = Math.floor(Math.random() * animalsChoices.length)
+            const animalRandom = animalsChoices[indexRandom]
+            setAnimal(curr => [...curr, animalRandom])
+        }
+
+            return(
+                <>
+                <button onClick={add}>Aggiungi Animale</button>
+                <details>
+                    <summary>Animali</summary>
+                    <p>
+                        <ul>
+                            {animal.map((el, index) => (
+                                <li key={index}>{el}</li>
+                            ))}
+                        </ul>
+                    </p>
+                </details>
+                </>
+            )
         }
         const { createRoot } = ReactDOM
         const listaAnimaliDom = document.querySelector('.lista-animali')
